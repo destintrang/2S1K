@@ -1,0 +1,25 @@
+NOTES
+
+-cylinder enemy
+	-3/4/6 etc shooters around
+	-shoots around
+
+-drill/cone enemy
+	-melee; runs at player, probably spinning
+
+-eye/ball enemy
+	-basic shooter, can maybe teleport
+	-gungeon reference? lol
+
+-smaller eye/ball enemy
+	-homing missles
+
+-"V" enemy
+	-shoots in a fork
+
+
+-Big moving boss
+	-Just a big blob; pacman?
+	-Moves around kind of fast? tries to catch blue player
+	-only dies to red bullets
+	-red player has to try shooting it as it moves without hitting the blue player
