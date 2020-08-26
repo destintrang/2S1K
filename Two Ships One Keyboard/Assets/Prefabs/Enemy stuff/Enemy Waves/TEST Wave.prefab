@@ -45,4 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypes:
   - {fileID: 2016569268105575007, guid: 55642b634339e194e946ec1984f72791, type: 3}
-  maxEnemies: 1
+  maxEnemies: 2
+  groups:
+  - max: 2
+    enemyList:
+    - {fileID: 2016569268105575007, guid: 55642b634339e194e946ec1984f72791, type: 3}
+  - max: 1
+    enemyList:
+    - {fileID: 5185488865648477868, guid: 215f5fa490590ae419235206516babb6, type: 3}

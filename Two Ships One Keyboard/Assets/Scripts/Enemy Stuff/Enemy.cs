@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : BaseShip
 {
 
 
@@ -31,6 +31,11 @@ public class Enemy : MonoBehaviour
     private Collision collisionType;
 
 
+    //For notifying which group this enemy belonged to
+    private int groupIndex;
+    public void SetGroup (int g) { groupIndex = g; }
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +56,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
 
         //Only handle collisions from projectiles
@@ -62,7 +67,7 @@ public class Enemy : MonoBehaviour
         {
 
             //Enemy got hit by a different colored bullet
-            TakeDamage();
+            TakeDamage(p.GetDamage());
             p.OnHit();
 
         }
@@ -92,6 +97,10 @@ public class Enemy : MonoBehaviour
 
         //Finally, play the death animation
         GetComponent<Animator>().Play("Enemy Death");
+        //Start flashing
+        GetComponent<Flash>().PlayDeathFlash();
+        //explode
+        FindObjectOfType<ExplosionManager>().Explode(transform.position);
 
     }
     //Called after the enemy's death animation
@@ -99,7 +108,7 @@ public class Enemy : MonoBehaviour
     {
 
         //Alert the wave manager that an enemy has died
-        EnemyWaveManager.instance.OnEnemyDeath();
+        EnemyWaveManager.instance.OnEnemyDeath(groupIndex);
 
         //Finally destroy the enemy object
         Destroy(this.gameObject);
@@ -108,13 +117,13 @@ public class Enemy : MonoBehaviour
 
 
     //Call this when hit by the player projectile
-    public virtual void TakeDamage ()
+    public virtual void TakeDamage (int damage)
     {
 
         //The enemy doesn't take damage after its dead (zero health)
         if (dead) { return; }
 
-        health -= 1;
+        health -= damage;
 
         //For now, if the enemy dies, just delete the object
         if (IsDead())
@@ -124,6 +133,18 @@ public class Enemy : MonoBehaviour
 
         GetComponent<Flash>().PlayFlash();
         float percent = (float) health / maxHealth;
+
+    }
+    
+    //Called when the enemy is hit by the blue ship's shockwave
+    public override void OnShockwave()
+    {
+
+        //The enemy doesn't take damage after its dead (zero health)
+        if (dead) { return; }
+
+        health = 0;
+        OnZeroHealth();
 
     }
 

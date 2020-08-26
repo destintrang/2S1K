@@ -46,3 +46,7 @@ MonoBehaviour:
   enemyTypes:
   - {fileID: 2016569268105575007, guid: 55642b634339e194e946ec1984f72791, type: 3}
   maxEnemies: 1
+  enemyGroups:
+  - {fileID: 1937838252176045500, guid: d9bb49cb0bae9bf498a7591b38a559ed, type: 3}
+  groups:
+  - max: 0

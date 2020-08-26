@@ -13,7 +13,11 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] protected int coins;
     private int coinsNeeded = 100;
+
     private int upgradeCount = 0;
+    delegate void UpgradeFunction();
+    private List<UpgradeFunction> redUpgrades = new List<UpgradeFunction> { };
+    private List<UpgradeFunction> blueUpgrades = new List<UpgradeFunction> { };
 
 
     // Start is called before the first frame update
@@ -23,6 +27,9 @@ public class ScoreManager : MonoBehaviour
         //Initialize score/coins
         score = 0;
         coins = 0;
+
+        //Initialize upgrades
+        InitializeUpgrades();
 
     }
 
@@ -59,14 +66,81 @@ public class ScoreManager : MonoBehaviour
     }
 
 
+
+    //UPGRADE STUFF
     private void LevelUp ()
     {
 
         coins = 0;
         coinsNeeded += 50;
+
         Debug.Log("UPGRADE");
+        UpgradeShips();
 
     }
 
+    private void UpgradeShips ()
+    {
+
+        int randomIndex = Random.Range(0, redUpgrades.Count);
+        redUpgrades[randomIndex]();
+        redUpgrades.RemoveAt(randomIndex);
+
+        randomIndex = Random.Range(0, blueUpgrades.Count);
+        blueUpgrades[randomIndex]();
+        blueUpgrades.RemoveAt(randomIndex);
+
+    }
+
+    //Called at the start of the game
+    private void InitializeUpgrades ()
+    {
+
+        redUpgrades.Add(UpgradeRedDamage);
+        redUpgrades.Add(UpgradeRedAttackSpeed);
+        redUpgrades.Add(UpgradeRedProjectileSpeed);
+        redUpgrades.Add(UpgradeRedMovementSpeed);
+
+        blueUpgrades.Add(UpgradeBlueShieldSize);
+        blueUpgrades.Add(UpgradeBlueMovementSpeed);
+        blueUpgrades.Add(UpgradeBlueDischarge);
+        blueUpgrades.Add(UpgradeBlueCooldown);
+
+    }
+
+    //Red upgrades
+    void UpgradeRedDamage()
+    {
+
+    }
+    void UpgradeRedAttackSpeed()
+    {
+
+    }
+    void UpgradeRedProjectileSpeed()
+    {
+
+    }
+    void UpgradeRedMovementSpeed()
+    {
+
+    }
+    //Blue upgrades
+    private void UpgradeBlueShieldSize()
+    {
+
+    }
+    private void UpgradeBlueMovementSpeed()
+    {
+
+    }
+    private void UpgradeBlueCooldown()
+    {
+
+    }
+    private void UpgradeBlueDischarge()
+    {
+
+    }
 
 }

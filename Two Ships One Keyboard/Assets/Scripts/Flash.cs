@@ -9,6 +9,9 @@ public class Flash : MonoBehaviour
     //How long to flash white
     private float flashDuration = 15;
 
+    //How long to flash during death
+    private float deathFlashDuration = 80;
+
     public Material w;
     private Material originalMaterial;
     public MeshRenderer r;
@@ -50,6 +53,41 @@ public class Flash : MonoBehaviour
 
         r.material = originalMaterial;
 
+    }
+
+
+    public void PlayDeathFlash ()
+    {
+        StopAllCoroutines();
+        StartCoroutine(DeathFlash());
+    }
+    IEnumerator DeathFlash ()
+    {
+        float counter = 0;
+        r.material = w;
+        bool flash = true;
+
+        while (true)
+        {
+            if (counter >= deathFlashDuration)
+            {
+                if (flash)
+                {
+                    r.material = originalMaterial;
+                }
+                else
+                {
+                    r.material = w;
+                }
+                flash = !flash;
+                counter = 0;
+            }
+            else
+            {
+                counter++;
+            }
+            yield return null;
+        }
     }
 
 

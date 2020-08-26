@@ -19,7 +19,10 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected ParticleSystem sparks;
 
     private Collision collision;
+    private bool reflected = false;
 
+    //These are set when projectiles are fired
+    private int damage = 1;
     private Vector3 direction = new Vector3();
     private float speed = 0;
 
@@ -43,7 +46,7 @@ public class Projectile : MonoBehaviour
     }
 
 
-    public void StartProjectile (Collision.CollisionType color, Vector3 dir, float sp)
+    public void StartProjectile (Collision.CollisionType color, Vector3 dir, float sp, int dmg)
     {
 
         //Just deactivate all trails here to make things easy
@@ -51,7 +54,11 @@ public class Projectile : MonoBehaviour
         redTrail.gameObject.SetActive(false);
         purpleTrail.gameObject.SetActive(false);
 
+        //Reset the reflected state
+        reflected = false;
 
+        //Set trajectory, damage, and speed
+        damage = dmg;
         direction = dir;
         speed = sp;
 
@@ -75,6 +82,10 @@ public class Projectile : MonoBehaviour
         StartCoroutine(ProjectileDuration());
 
     }
+    public int GetDamage ()
+    {
+        return damage;
+    }
 
 
     IEnumerator ProjectileDuration ()
@@ -97,10 +108,19 @@ public class Projectile : MonoBehaviour
     }
 
 
+
     //Called when a projectile gets reflected by, say, the blue shield
     public void ReflectProjectile (Vector3 normal)
     {
-        direction = Vector3.Reflect(direction, normal);
+
+        //Each projectile can only be reflected once for now
+        if (reflected) { return; }
+        else
+        {
+            direction = Vector3.Reflect(direction, normal);
+            reflected = true;
+        }
+
     }
 
 

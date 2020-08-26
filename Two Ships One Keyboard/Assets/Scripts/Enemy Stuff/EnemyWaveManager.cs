@@ -61,9 +61,9 @@ public class EnemyWaveManager : MonoBehaviour
 
 
     //Call this when any enemy dies
-    public void OnEnemyDeath ()
+    public void OnEnemyDeath (int g)
     {
-        activeEnemies--;
+        currentWave.OnEnemyDeath(g);
     }
 
 
@@ -72,13 +72,22 @@ public class EnemyWaveManager : MonoBehaviour
     {
 
         if (!canSpawn) { return; }
-
+        currentWave.UpdateWave();
+        return;
 
         if (spawnTimer < spawnCooldown) {
             spawnTimer += Time.deltaTime;
             return;
         }
 
+        Enemy enemy = currentWave.CheckForSpawn();
+        if (enemy != null)
+        {
+            Enemy spawnedEnemy = Instantiate(enemy, GetSpawnLocation(), Quaternion.identity);
+            //Also reset the spawn cooldown
+            spawnTimer = 0;
+        }
+        return;
 
         if (activeEnemies < currentWave.GetMaxEnemies())
         {
@@ -102,6 +111,7 @@ public class EnemyWaveManager : MonoBehaviour
 
         waveCounter++;
         currentWave = waves[waveCounter];
+        currentWave.StartWave(xBound, zBound, players, safetyDistance, spawnCooldown);
 
     }
 

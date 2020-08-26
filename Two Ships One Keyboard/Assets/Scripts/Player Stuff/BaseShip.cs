@@ -17,4 +17,11 @@ public class BaseShip : MonoBehaviour
 
     }
 
+
+    //Called when a ship is hit by the blue ship's shockwave
+    public virtual void OnShockwave ()
+    {
+
+    }
+
 }

@@ -14,6 +14,9 @@ public class AttackShip : BasePlayerShip
     //Speed this ship's projectiles are fired at
     [SerializeField] protected float projectileSpeed;
 
+    //How much damage these bullets do
+    private int damage = 1;
+
     //Gun positions we'll shoot from
     [SerializeField] protected List<Transform> guns;
     private int gunCounter = 0;
@@ -63,6 +66,12 @@ public class AttackShip : BasePlayerShip
     {
         GameManager.instance.LoseGame();
     }
+    public override void OnShockwave()
+    {
+
+        TakeDamage();
+
+    }
 
 
     protected override void UpdateMovement()
@@ -100,8 +109,29 @@ public class AttackShip : BasePlayerShip
         p.transform.position = guns[gunCounter].position;
         gunCounter = (gunCounter + 1) % guns.Count; 
 
-        p.StartProjectile(Collision.CollisionType.RED, ship.forward, projectileSpeed);
+        p.StartProjectile(Collision.CollisionType.RED, ship.forward, projectileSpeed, damage);
         fireCounter = fireCooldown;
+
+    }
+
+
+
+
+    //UDGRADES
+    public void UpgradeDamage ()
+    {
+
+    }
+    public void UpgradeAttackSpeed ()
+    {
+
+    }
+    public void UpgradeProjectileSpeed ()
+    {
+
+    }
+    public void UpgradeMovementSpeed ()
+    {
 
     }
 

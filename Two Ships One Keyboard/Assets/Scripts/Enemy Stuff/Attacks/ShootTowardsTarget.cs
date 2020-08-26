@@ -73,7 +73,7 @@ public class ShootTowardsTarget : EnemyAttack
         Vector3 dir = (playerPos - transform.position).normalized;
         dir = AccuracyRandomizer(dir, inaccuracy);
 
-        p.StartProjectile(projectileType, dir, projectileSpeed);
+        p.StartProjectile(projectileType, dir, projectileSpeed, 1);
     }
 
 

@@ -11,13 +11,14 @@ public class DefenseShip : BasePlayerShip
     [SerializeField] protected float shieldSpeedMult;
     private float baseSpeed;
 
-    //Reference to the animator controlling the shield
-    [SerializeField] protected Animator shield;
+    //Reference to the script controlling the shield
+    [SerializeField] protected ShieldController shield;
 
     private bool shielding = false;
 
     [SerializeField] protected float dischargeTime;
     [SerializeField] protected float dischargeCooldown;
+    [SerializeField] protected float shieldDeploySpeed;
     private float dischargeCounter = 0;
     private float cooldownCounter = 0;
 
@@ -131,11 +132,10 @@ public class DefenseShip : BasePlayerShip
             {
 
                 //Tried to activate the shield too soon, caused a discharge
-                Debug.Log("DISCHARGE");
                 cooldownCounter = dischargeCooldown;
 
                 //No matter what the shield is doing, it will turn off
-                shield.Play("Discharge");
+                shield.Discharge();
 
                 //Revert things
                 shielding = false;
@@ -149,8 +149,8 @@ public class DefenseShip : BasePlayerShip
             dischargeCounter = 0;
 
             if (!shielding)
-            {  
-                shield.Play("Start Shield");
+            {
+                shield.DeployShield(shieldDeploySpeed);
                 shielding = true;
 
                 //Slow the player when shield is held
@@ -158,7 +158,7 @@ public class DefenseShip : BasePlayerShip
             }
             else if (shielding)
             {
-                shield.Play("End Shield");
+                shield.EndShield(shieldDeploySpeed);
                 shielding = false;
 
                 //Revert speed
@@ -166,6 +166,26 @@ public class DefenseShip : BasePlayerShip
             }
 
         }
+
+    }
+
+
+
+    //UPGRADES
+    public void UpgradeShieldSize ()
+    {
+
+    }
+    public void UpgradeMovementSpeed ()
+    {
+
+    }
+    public void UpgradeDischargeCooldown ()
+    {
+
+    }
+    public void UpgradeDischargeSize ()
+    {
 
     }
 

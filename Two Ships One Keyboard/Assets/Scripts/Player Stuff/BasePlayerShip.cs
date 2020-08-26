@@ -168,5 +168,10 @@ public class BasePlayerShip : BaseShip
 
     }
 
+    protected virtual void Upgrade ()
+    {
+
+    }
+
 
 }

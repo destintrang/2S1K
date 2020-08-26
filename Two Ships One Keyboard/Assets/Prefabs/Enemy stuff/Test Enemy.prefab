@@ -136,6 +136,7 @@ MonoBehaviour:
   maxHealth: 5
   points: 100
   coins: 2
+  groupIndex: 0
 --- !u!114 &1495778293745688109
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -111,6 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 1
+  redMaterial: {fileID: 0}
+  blueMaterial: {fileID: 0}
+  purpleMaterial: {fileID: 0}
 --- !u!95 &1124340398727855337
 Animator:
   serializedVersion: 3
@@ -145,7 +148,7 @@ MonoBehaviour:
   projectileType: 1
   projectileSpeed: 5
   inaccuracy: 45
-  attackCooldown: 300
+  attackCooldown: 500
   attackCooldownRandomizer: 0.75
   ship: {fileID: 1812380789650362175}
 --- !u!114 &6736758201159465333
