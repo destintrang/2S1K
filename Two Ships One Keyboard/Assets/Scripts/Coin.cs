@@ -118,7 +118,7 @@ public class Coin : MonoBehaviour
 
             }
 
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         FindObjectOfType<CoinManager>().AddToPool(this);

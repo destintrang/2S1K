@@ -7,6 +7,11 @@ public class GameManager : MonoBehaviour
 {
 
 
+    public bool godMode;
+
+    public GameObject winScreen;
+
+
     //Singleton
     public static GameManager instance;
     private void Awake()
@@ -15,9 +20,21 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void WinGame()
+    {
+
+        winScreen.SetActive(true);
+
+    }
+
+
     public void LoseGame ()
     {
 
+        if (godMode) {
+            Debug.Log("DEATH");
+            return; 
+        }
         SceneManager.LoadSceneAsync(0);
 
     }

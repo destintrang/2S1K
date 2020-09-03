@@ -50,7 +50,7 @@ public class HUDManager : MonoBehaviour
         {
             timer += Time.deltaTime;
             scoreText.text = ((int)Mathf.Lerp(origScore, newScore, timer / scoreUpdateTime)).ToString();
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         scoreText.text = ((int) newScore).ToString();
@@ -82,7 +82,7 @@ public class HUDManager : MonoBehaviour
         {
             timer += Time.deltaTime;
             bar.fillAmount = Mathf.Lerp(origFill, percent, timer / barUpdateTime);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         bar.fillAmount = percent;

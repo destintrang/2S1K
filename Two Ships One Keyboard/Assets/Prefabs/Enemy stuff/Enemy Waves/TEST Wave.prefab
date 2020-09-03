@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1464776316313082850}
   - component: {fileID: 6416750106172667544}
   m_Layer: 0
-  m_Name: TEST Wave
+  m_Name: Test Wave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,13 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01d17316e70f5746a423f699f89dda0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTypes:
-  - {fileID: 2016569268105575007, guid: 55642b634339e194e946ec1984f72791, type: 3}
-  maxEnemies: 2
   groups:
-  - max: 2
+  - max: 1
+    total: 20
+    enemyList:
+    - {fileID: 2016569268105575007, guid: 96cffd6ac3da9e54fad1e4ee4457a60d, type: 3}
+  - max: 1
+    total: 20
     enemyList:
     - {fileID: 2016569268105575007, guid: 55642b634339e194e946ec1984f72791, type: 3}
-  - max: 1
-    enemyList:
-    - {fileID: 5185488865648477868, guid: 215f5fa490590ae419235206516babb6, type: 3}

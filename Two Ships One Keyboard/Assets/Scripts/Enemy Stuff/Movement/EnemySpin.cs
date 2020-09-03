@@ -16,7 +16,7 @@ public class EnemySpin : EnemyMovement
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //If not actionable, don't do anything
         if (!GetComponent<Enemy>().IsActionable()) { return; }

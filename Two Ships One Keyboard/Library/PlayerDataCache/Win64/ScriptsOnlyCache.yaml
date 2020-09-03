@@ -2,11 +2,13 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - AttackShip
+    - AudioManager
     - Coin
     - CoinManager
     - Collision
     - DefenseShip
     - Enemy
+    - EnemySpin
     - EnemyWave
     - EnemyWaveManager
     - ExplosionManager
@@ -16,6 +18,7 @@ ScriptsOnlyBuild:
     - HUDManager
     - InputManager
     - Magnet
+    - MoveTowardsTarget
     - ObjectSpawner
     - Projectile
     - ProjectileManager
@@ -23,8 +26,10 @@ ScriptsOnlyBuild:
     - ShieldController
     - ShieldHitbox
     - ShockwaveHitbox
+    - ShootAround
     - ShootTowardsTarget
     - SparksManager
+    - Spin
     - Targeting
     - Wander
     Unity.Postprocessing.Runtime.dll:
@@ -107,7 +112,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
-    Assets/Scenes/Enemy Test Scene.unity:
+    Assets/Scenes/Prototype.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -137,6 +142,8 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -205,6 +212,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13080}
     - Class: 114
+      Script: {instanceID: 13106}
+    - Class: 114
       Script: {instanceID: 13210}
     - Class: 114
       Script: {instanceID: 13270}
@@ -221,7 +230,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13784}
     - Class: 114
+      Script: {instanceID: 13796}
+    - Class: 114
       Script: {instanceID: 13800}
+    - Class: 114
+      Script: {instanceID: 13818}
     - Class: 114
       Script: {instanceID: 13848}
     - Class: 114
@@ -285,17 +298,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15692}
     - Class: 114
-      Script: {instanceID: 15790}
-    - Class: 114
       Script: {instanceID: 15792}
     - Class: 114
-      Script: {instanceID: 15822}
+      Script: {instanceID: 15794}
     - Class: 114
-      Script: {instanceID: 15852}
+      Script: {instanceID: 15824}
     - Class: 114
-      Script: {instanceID: 15988}
+      Script: {instanceID: 15842}
     - Class: 114
-      Script: {instanceID: 15996}
+      Script: {instanceID: 15854}
+    - Class: 114
+      Script: {instanceID: 15990}
+    - Class: 114
+      Script: {instanceID: 15998}
+    - Class: 114
+      Script: {instanceID: 17526}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -445,7 +462,7 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerPersistentCanvas
   - hash:
       serializedVersion: 2
-      Hash: 1eeec31e269efd6c9938f5ac76e41047
+      Hash: 817a70f81a01b9535453674081a2eb0a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyWave
@@ -967,7 +984,7 @@ ScriptsOnlyBuild:
     className: MotionBlur
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 675872f050df7688837d08f6d8d640c9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -1123,7 +1140,7 @@ ScriptsOnlyBuild:
     className: ColorAdjustments
   - hash:
       serializedVersion: 2
-      Hash: 83ca1c633bc05b0bbd10bc9b1fa9a3a4
+      Hash: 0dcdf94d7c3dce7d6ed6464e9a69ebc1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ShieldController
@@ -1195,7 +1212,7 @@ ScriptsOnlyBuild:
     className: MarkerTrack
   - hash:
       serializedVersion: 2
-      Hash: 862c7509f5f27d4a29b18b5b9d6d7dda
+      Hash: cf955696e5c2b9d1fcacaa32bfd373c8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyWaveManager
@@ -1333,6 +1350,12 @@ ScriptsOnlyBuild:
     className: BaseShip
   - hash:
       serializedVersion: 2
+      Hash: 1eeec31e269efd6c9938f5ac76e41047
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyGroup
+  - hash:
+      serializedVersion: 2
       Hash: c60c5cba0d5ed4f4a018240d6339217f
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner
@@ -1445,8 +1468,14 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: ff44d521cd28384759d0308e50a144de
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AudioManager
   platform: 19
   scenePathNames:
-  - Assets/Scenes/Enemy Test Scene.unity
+  - Assets/Scenes/Prototype.unity
   playerPath: C:/Users/Destin/Documents/Unity/2S1K/Two Ships One Keyboard/Builds/Windows/Two
     Ships One Keyboard.exe

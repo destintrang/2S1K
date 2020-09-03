@@ -21,7 +21,7 @@ public class Wander : EnemyMovement
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         //If not actionable, don't do anything

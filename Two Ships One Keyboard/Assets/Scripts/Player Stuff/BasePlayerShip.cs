@@ -9,8 +9,8 @@ public class BasePlayerShip : BaseShip
     protected Rigidbody rb;
 
     [SerializeField] protected Transform ship;
+    [SerializeField] protected MeshRenderer shipMesh;
 
-    protected Vector3 moveInput;
     [SerializeField] protected float moveSpeed;
 
     [SerializeField] protected float rotationSmooth;
@@ -18,6 +18,15 @@ public class BasePlayerShip : BaseShip
     protected float from = 0;
     protected float to = 0;
     float counter = 0;
+
+    //How long the player is invulnerable after barrier
+    [SerializeField] protected float iFrames;
+    protected bool invincible = false;
+
+    protected Vector3 moveInput = Vector3.zero;
+    protected bool rightInput = false;
+    protected bool leftInput = false;
+    protected bool actionInput = false;
 
 
     // Start is called before the first frame update
@@ -29,19 +38,21 @@ public class BasePlayerShip : BaseShip
 
     }
 
-    [SerializeField] protected Vector3 speed = Vector3.zero;
-    [SerializeField] protected Vector3 maxSpeed = new Vector3(100, 0, 100);
-    [SerializeField] protected Vector3 acceleration = new Vector3(100, 0, 100);
-    [SerializeField] protected Vector3 deceleration = new Vector3(50, 0, 50);
+    private Vector3 speed = Vector3.zero;
+    [SerializeField] protected float maxSpeed;
+    [SerializeField] protected float upgradedMaxSpeed ;
+    [SerializeField] protected float acceleration;
+    [SerializeField] protected float upgradedAcceleration;
+    [SerializeField] protected float deceleration ;
+    [SerializeField] protected float upgradedDeceleration ;
+
+
+
     // Update is called once per frame
     void Update()
     {
 
-        UpdateMovement();
-        UpdateRotation();
-        UpdateAction();
-
-        MoveShip();
+        UpdateInput();
 
     }
 
@@ -52,31 +63,33 @@ public class BasePlayerShip : BaseShip
 
         //Handle actually moving the ship here
         MoveShip();
+        UpdateRotation();
+        UpdateAction();
 
 
     }
 
-    private void MoveShip ()
+    protected void MoveShip ()
     {
         float xSpeed = speed.x;
         float zSpeed = speed.z;
-        if (moveInput.x > 0 && speed.x < maxSpeed.x)
+        if (moveInput.x > 0 && speed.x < maxSpeed)
         {
-            xSpeed = speed.x + acceleration.x * Time.deltaTime;
+            xSpeed = speed.x + acceleration * Time.deltaTime;
         }
-        else if (moveInput.x < 0 && speed.x > -maxSpeed.x)
+        else if (moveInput.x < 0 && speed.x > -maxSpeed)
         {
-            xSpeed = speed.x - acceleration.x * Time.deltaTime;
+            xSpeed = speed.x - acceleration * Time.deltaTime;
         }
         else
         {
-            if (speed.x > deceleration.x * Time.deltaTime)
+            if (speed.x > deceleration * Time.deltaTime)
             {
-                xSpeed = speed.x - deceleration.x * Time.deltaTime;
+                xSpeed = speed.x - deceleration * Time.deltaTime;
             }
-            else if (speed.x < -deceleration.x * Time.deltaTime)
+            else if (speed.x < -deceleration * Time.deltaTime)
             {
-                xSpeed = speed.x + deceleration.x * Time.deltaTime;
+                xSpeed = speed.x + deceleration * Time.deltaTime;
             }
             else
             {
@@ -84,23 +97,23 @@ public class BasePlayerShip : BaseShip
             }
         }
 
-        if (moveInput.z > 0 && speed.z < maxSpeed.z)
+        if (moveInput.z > 0 && speed.z < maxSpeed)
         {
-            zSpeed = speed.z + acceleration.z * Time.deltaTime;
+            zSpeed = speed.z + acceleration * Time.deltaTime;
         }
-        else if (moveInput.z < 0 && speed.z > -maxSpeed.z)
+        else if (moveInput.z < 0 && speed.z > -maxSpeed)
         {
-            zSpeed = speed.z - acceleration.z * Time.deltaTime;
+            zSpeed = speed.z - acceleration * Time.deltaTime;
         }
         else
         {
-            if (speed.z > deceleration.z * Time.deltaTime)
+            if (speed.z > deceleration * Time.deltaTime)
             {
-                zSpeed = speed.z - deceleration.z * Time.deltaTime;
+                zSpeed = speed.z - deceleration * Time.deltaTime;
             }
-            else if (speed.z < -deceleration.z * Time.deltaTime)
+            else if (speed.z < -deceleration * Time.deltaTime)
             {
-                zSpeed = speed.z + deceleration.z * Time.deltaTime;
+                zSpeed = speed.z + deceleration * Time.deltaTime;
             }
             else
             {
@@ -117,7 +130,8 @@ public class BasePlayerShip : BaseShip
     }
 
 
-    protected virtual void UpdateMovement ()
+    //Call this in Update
+    protected virtual void UpdateInput ()
     {
 
         Vector2 input = InputManager.instance.GetP1Movement();
@@ -170,6 +184,54 @@ public class BasePlayerShip : BaseShip
 
     protected virtual void Upgrade ()
     {
+
+    }
+
+
+    Coroutine i = null;
+    public void StartInvincibility ()
+    {
+        if (i != null) { StopCoroutine(i); }
+        i = StartCoroutine(Invincibility());
+    }
+    IEnumerator Invincibility ()
+    {
+        
+        float flashInterval = 5;
+        float counter = 0;
+        float flashCounter = 0;
+        //r.material = w;
+        shipMesh.enabled = false;
+        invincible = true;
+        bool flash = true;
+
+        while (counter < iFrames)
+        {
+            counter++;
+            if (flashCounter >= flashInterval)
+            {
+                if (flash)
+                {
+                    //r.material = originalMaterial;
+                    shipMesh.enabled = true;
+                }
+                else
+                {
+                    //r.material = w;
+                    shipMesh.enabled = false;
+                }
+                flash = !flash;
+                flashCounter = 0;
+            }
+            else
+            {
+                flashCounter++;
+            }
+            yield return new WaitForFixedUpdate();
+        }
+
+        invincible = false;
+        shipMesh.enabled = true;
 
     }
 

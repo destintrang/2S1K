@@ -2,11 +2,13 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - AttackShip
+    - AudioManager
     - Coin
     - CoinManager
     - Collision
     - DefenseShip
     - Enemy
+    - EnemySpin
     - EnemyWave
     - EnemyWaveManager
     - ExplosionManager
@@ -16,6 +18,7 @@ ScriptsOnlyBuild:
     - HUDManager
     - InputManager
     - Magnet
+    - MoveTowardsTarget
     - ObjectSpawner
     - Projectile
     - ProjectileManager
@@ -23,8 +26,10 @@ ScriptsOnlyBuild:
     - ShieldController
     - ShieldHitbox
     - ShockwaveHitbox
+    - ShootAround
     - ShootTowardsTarget
     - SparksManager
+    - Spin
     - Targeting
     - Wander
     Unity.Postprocessing.Runtime.dll:
@@ -107,7 +112,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
-    Assets/Scenes/Enemy Test Scene.unity:
+    Assets/Scenes/Prototype.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -137,6 +142,8 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -205,97 +212,107 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13080}
     - Class: 114
-      Script: {instanceID: 13210}
+      Script: {instanceID: 13106}
     - Class: 114
-      Script: {instanceID: 13270}
+      Script: {instanceID: 13118}
     - Class: 114
-      Script: {instanceID: 13324}
+      Script: {instanceID: 13212}
     - Class: 114
-      Script: {instanceID: 13560}
+      Script: {instanceID: 13272}
     - Class: 114
-      Script: {instanceID: 13606}
+      Script: {instanceID: 13326}
     - Class: 114
-      Script: {instanceID: 13654}
+      Script: {instanceID: 13562}
     - Class: 114
-      Script: {instanceID: 13668}
+      Script: {instanceID: 13608}
     - Class: 114
-      Script: {instanceID: 13784}
+      Script: {instanceID: 13656}
     - Class: 114
-      Script: {instanceID: 13800}
+      Script: {instanceID: 13670}
     - Class: 114
-      Script: {instanceID: 13848}
+      Script: {instanceID: 13786}
     - Class: 114
-      Script: {instanceID: 13986}
+      Script: {instanceID: 13798}
     - Class: 114
-      Script: {instanceID: 14088}
+      Script: {instanceID: 13802}
     - Class: 114
-      Script: {instanceID: 14116}
+      Script: {instanceID: 13820}
     - Class: 114
-      Script: {instanceID: 14130}
+      Script: {instanceID: 13850}
     - Class: 114
-      Script: {instanceID: 14400}
+      Script: {instanceID: 13988}
     - Class: 114
-      Script: {instanceID: 14426}
+      Script: {instanceID: 14090}
     - Class: 114
-      Script: {instanceID: 14488}
+      Script: {instanceID: 14120}
+    - Class: 114
+      Script: {instanceID: 14134}
+    - Class: 114
+      Script: {instanceID: 14404}
+    - Class: 114
+      Script: {instanceID: 14430}
     - Class: 114
       Script: {instanceID: 14492}
     - Class: 114
-      Script: {instanceID: 14508}
+      Script: {instanceID: 14496}
     - Class: 114
-      Script: {instanceID: 14516}
+      Script: {instanceID: 14512}
     - Class: 114
-      Script: {instanceID: 14638}
+      Script: {instanceID: 14520}
     - Class: 114
-      Script: {instanceID: 14674}
+      Script: {instanceID: 14642}
     - Class: 114
-      Script: {instanceID: 14682}
+      Script: {instanceID: 14678}
     - Class: 114
-      Script: {instanceID: 14752}
+      Script: {instanceID: 14686}
     - Class: 114
-      Script: {instanceID: 14818}
+      Script: {instanceID: 14756}
     - Class: 114
-      Script: {instanceID: 14836}
+      Script: {instanceID: 14822}
     - Class: 114
-      Script: {instanceID: 14848}
+      Script: {instanceID: 14840}
     - Class: 114
-      Script: {instanceID: 14960}
+      Script: {instanceID: 14852}
     - Class: 114
-      Script: {instanceID: 15008}
+      Script: {instanceID: 14964}
     - Class: 114
-      Script: {instanceID: 15018}
+      Script: {instanceID: 15012}
     - Class: 114
-      Script: {instanceID: 15088}
+      Script: {instanceID: 15022}
     - Class: 114
-      Script: {instanceID: 15318}
+      Script: {instanceID: 15092}
     - Class: 114
-      Script: {instanceID: 15324}
+      Script: {instanceID: 15322}
     - Class: 114
-      Script: {instanceID: 15342}
+      Script: {instanceID: 15328}
     - Class: 114
-      Script: {instanceID: 15392}
+      Script: {instanceID: 15346}
     - Class: 114
-      Script: {instanceID: 15532}
+      Script: {instanceID: 15396}
     - Class: 114
-      Script: {instanceID: 15578}
+      Script: {instanceID: 15536}
     - Class: 114
-      Script: {instanceID: 15580}
+      Script: {instanceID: 15582}
     - Class: 114
-      Script: {instanceID: 15670}
+      Script: {instanceID: 15584}
     - Class: 114
-      Script: {instanceID: 15692}
+      Script: {instanceID: 15674}
     - Class: 114
-      Script: {instanceID: 15790}
+      Script: {instanceID: 15696}
     - Class: 114
-      Script: {instanceID: 15792}
+      Script: {instanceID: 15796}
     - Class: 114
-      Script: {instanceID: 15822}
+      Script: {instanceID: 15798}
     - Class: 114
-      Script: {instanceID: 15852}
+      Script: {instanceID: 15828}
     - Class: 114
-      Script: {instanceID: 15988}
+      Script: {instanceID: 15846}
     - Class: 114
-      Script: {instanceID: 15996}
+      Script: {instanceID: 15858}
+    - Class: 114
+      Script: {instanceID: 15994}
+    - Class: 114
+      Script: {instanceID: 16002}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -445,7 +462,7 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerPersistentCanvas
   - hash:
       serializedVersion: 2
-      Hash: 1eeec31e269efd6c9938f5ac76e41047
+      Hash: 817a70f81a01b9535453674081a2eb0a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyWave
@@ -727,6 +744,12 @@ ScriptsOnlyBuild:
     className: ShootAround
   - hash:
       serializedVersion: 2
+      Hash: ff44d521cd28384759d0308e50a144de
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AudioManager
+  - hash:
+      serializedVersion: 2
       Hash: 7e6ed836cbaa230e56d6a2bbae1b9bb5
     assemblyName: Unity.Postprocessing.Runtime.dll
     namespaceName: UnityEngine.Rendering.PostProcessing
@@ -811,7 +834,7 @@ ScriptsOnlyBuild:
     className: TMP_Asset
   - hash:
       serializedVersion: 2
-      Hash: f1cd274d87aaf873c63f3cb8f19def79
+      Hash: f123748aa769dcf87f04a07d8a873ca6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DefenseShip
@@ -967,7 +990,7 @@ ScriptsOnlyBuild:
     className: MotionBlur
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 675872f050df7688837d08f6d8d640c9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -1123,7 +1146,7 @@ ScriptsOnlyBuild:
     className: ColorAdjustments
   - hash:
       serializedVersion: 2
-      Hash: 83ca1c633bc05b0bbd10bc9b1fa9a3a4
+      Hash: 84ea44c6dfccb84920a9ad3afd16c3bf
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ShieldController
@@ -1141,7 +1164,7 @@ ScriptsOnlyBuild:
     className: EnemyAttack
   - hash:
       serializedVersion: 2
-      Hash: 6c14222932628458c3501d667d3aa55b
+      Hash: f0a5bb1bc28271a0647087a46fdb8f18
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AttackShip
@@ -1177,7 +1200,7 @@ ScriptsOnlyBuild:
     className: LiftGammaGain
   - hash:
       serializedVersion: 2
-      Hash: 8148d755f4ec78d9f1987d0d0976c75f
+      Hash: 35856580818d6e0377dd55fdfe2dc8a3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BasePlayerShip
@@ -1195,7 +1218,7 @@ ScriptsOnlyBuild:
     className: MarkerTrack
   - hash:
       serializedVersion: 2
-      Hash: 862c7509f5f27d4a29b18b5b9d6d7dda
+      Hash: cf955696e5c2b9d1fcacaa32bfd373c8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyWaveManager
@@ -1333,6 +1356,12 @@ ScriptsOnlyBuild:
     className: BaseShip
   - hash:
       serializedVersion: 2
+      Hash: 1eeec31e269efd6c9938f5ac76e41047
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyGroup
+  - hash:
+      serializedVersion: 2
       Hash: c60c5cba0d5ed4f4a018240d6339217f
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner
@@ -1447,5 +1476,5 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 2
   scenePathNames:
-  - Assets/Scenes/Enemy Test Scene.unity
+  - Assets/Scenes/Prototype.unity
   playerPath: C:/Users/Destin/Documents/Unity/2S1K/Two Ships One Keyboard/Builds/Mac/x86.app

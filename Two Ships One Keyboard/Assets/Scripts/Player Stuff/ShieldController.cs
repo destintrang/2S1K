@@ -15,9 +15,11 @@ public class ShieldController : MonoBehaviour
     [SerializeField] protected float shieldX;
     [SerializeField] protected float shieldY;
     [SerializeField] protected float shieldZ;
+    [SerializeField] protected Vector3 upgradedShield;
 
     //How big the wave will be
     [SerializeField] protected float waveScale;
+    [SerializeField] protected float upgradedWaveScale;
     //How fast the shockwave is animated
     [SerializeField] protected float waveTime;
     //Delay between waves
@@ -45,7 +47,7 @@ public class ShieldController : MonoBehaviour
         {
             shield.localScale = new Vector3(Mathf.Lerp(shield.localScale.x, shieldX, counter/time), Mathf.Lerp(shield.localScale.y, shieldY, counter / time), Mathf.Lerp(shield.localScale.z, shieldZ, counter / time));
             counter++;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         shield.localScale = new Vector3(shieldX, shieldY, shield.localScale.z);
@@ -67,7 +69,7 @@ public class ShieldController : MonoBehaviour
         {
             shield.localScale = new Vector3(Mathf.Lerp(shield.localScale.x, 0, counter / time), Mathf.Lerp(shield.localScale.y, 0, counter / time), Mathf.Lerp(shield.localScale.z, 0, counter / time));
             counter++;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         shield.localScale = new Vector3(0, 0, shield.localScale.z);
@@ -84,6 +86,9 @@ public class ShieldController : MonoBehaviour
         //Reset the shield
         shield.localScale = new Vector3(0, 0, shield.localScale.z);
         shield.gameObject.SetActive(false);
+
+        //Play the discharge SFX
+        FindObjectOfType<AudioManager>().Play("Discharge");
 
         StartCoroutine(Shockwave());
     }
@@ -107,7 +112,7 @@ public class ShieldController : MonoBehaviour
         {
             wave.localScale = new Vector3(Mathf.Lerp(0, waveScale, counter / waveTime), Mathf.Lerp(1, 0, counter / waveTime), Mathf.Lerp(0, waveScale, counter / waveTime));
             counter++;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         wave.localScale = new Vector3(waveScale, 0, waveScale);
@@ -115,7 +120,16 @@ public class ShieldController : MonoBehaviour
     }
 
 
-
+    public void UpgradeShield ()
+    {
+        shieldX = upgradedShield.x;
+        shieldY = upgradedShield.y;
+        shieldZ = upgradedShield.z;
+    }
+    public void UpgradeDischarge ()
+    {
+        waveScale = upgradedWaveScale;
+    }
     
 
 

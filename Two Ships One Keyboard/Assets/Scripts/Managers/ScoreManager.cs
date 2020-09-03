@@ -12,7 +12,7 @@ public class ScoreManager : MonoBehaviour
 
 
     [SerializeField] protected int coins;
-    private int coinsNeeded = 100;
+    private int coinsNeeded = 20;
 
     private int upgradeCount = 0;
     delegate void UpgradeFunction();
@@ -30,6 +30,7 @@ public class ScoreManager : MonoBehaviour
 
         //Initialize upgrades
         InitializeUpgrades();
+
 
     }
 
@@ -72,7 +73,7 @@ public class ScoreManager : MonoBehaviour
     {
 
         coins = 0;
-        coinsNeeded += 50;
+        coinsNeeded += 5;
 
         Debug.Log("UPGRADE");
         UpgradeShips();
@@ -96,7 +97,7 @@ public class ScoreManager : MonoBehaviour
     private void InitializeUpgrades ()
     {
 
-        redUpgrades.Add(UpgradeRedDamage);
+        redUpgrades.Add(UpgradeRedGuns);
         redUpgrades.Add(UpgradeRedAttackSpeed);
         redUpgrades.Add(UpgradeRedProjectileSpeed);
         redUpgrades.Add(UpgradeRedMovementSpeed);
@@ -113,34 +114,38 @@ public class ScoreManager : MonoBehaviour
     {
 
     }
+    void UpgradeRedGuns()
+    {
+        FindObjectOfType<AttackShip>().UpgradeGuns();
+    }
     void UpgradeRedAttackSpeed()
     {
-
+        FindObjectOfType<AttackShip>().UpgradeAttackSpeed();
     }
     void UpgradeRedProjectileSpeed()
     {
-
+        FindObjectOfType<AttackShip>().UpgradeProjectileSpeed();
     }
     void UpgradeRedMovementSpeed()
     {
-
+        FindObjectOfType<AttackShip>().UpgradeMovementSpeed();
     }
     //Blue upgrades
     private void UpgradeBlueShieldSize()
     {
-
+        FindObjectOfType<DefenseShip>(). UpgradeShieldSize();
     }
     private void UpgradeBlueMovementSpeed()
     {
-
+        FindObjectOfType<DefenseShip>().UpgradeMovementSpeed();
     }
     private void UpgradeBlueCooldown()
     {
-
+        FindObjectOfType<DefenseShip>().UpgradeDischargeCooldown();
     }
     private void UpgradeBlueDischarge()
     {
-
+        FindObjectOfType<DefenseShip>().UpgradeDischargeSize();
     }
 
 }

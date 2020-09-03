@@ -25,6 +25,7 @@ public class Projectile : MonoBehaviour
     private int damage = 1;
     private Vector3 direction = new Vector3();
     private float speed = 0;
+    private GameObject shooter = null;
 
 
 
@@ -38,7 +39,7 @@ public class Projectile : MonoBehaviour
     }
 
 
-    private void Update()
+    private void FixedUpdate()
     {
 
         transform.Translate(speed * direction * Time.deltaTime);
@@ -46,8 +47,14 @@ public class Projectile : MonoBehaviour
     }
 
 
-    public void StartProjectile (Collision.CollisionType color, Vector3 dir, float sp, int dmg)
+    public void StartProjectile(Collision.CollisionType color, Vector3 dir, float sp, int dmg, GameObject o = null)
     {
+
+        //Set the owner of this bullet, so that the shooter can't hurt themselves with their own bullet
+        if (o != null)
+        {
+            shooter = o;
+        }
 
         //Just deactivate all trails here to make things easy
         blueTrail.gameObject.SetActive(false);
@@ -93,10 +100,10 @@ public class Projectile : MonoBehaviour
 
         float timer = 0f;
 
-        while (timer < 10f)
+        while (timer < 20f)
         {
             timer += Time.deltaTime;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         DestroyProjectile();
@@ -130,8 +137,18 @@ public class Projectile : MonoBehaviour
 
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         FindObjectOfType<SparksManager>().Spark(transform.position, direction);
+
+        //Play on hit SFX
+        FindObjectOfType<AudioManager>().Play("On Hit");
+
         DestroyProjectile();
 
+    }
+
+    public bool IsOwner (GameObject o)
+    {
+        //Debug.Log(o.name + shooter.name);
+        return shooter == o;
     }
 
 

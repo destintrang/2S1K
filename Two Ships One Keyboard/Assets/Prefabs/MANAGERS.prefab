@@ -1,5 +1,94 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &148267338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 148267339}
+  - component: {fileID: 148267340}
+  - component: {fileID: 148267341}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &148267339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148267338}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7908151909347863926}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &148267340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148267338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f675ec74073b67b469aaa27bf593317e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Game Track
+    sound: {fileID: 8300000, guid: b90c0211c123259479da4bc541bc80fa, type: 3}
+    volume: 0.6
+    pitch: 1
+    playOnAwake: 1
+    loop: 1
+  - name: Red Ship Fire
+    sound: {fileID: 8300000, guid: 6274042e4373299488bdbf144bb44f26, type: 3}
+    volume: 1
+    pitch: 1.5
+    playOnAwake: 0
+    loop: 0
+  - name: Death Explosion
+    sound: {fileID: 8300000, guid: f6f7147279d616342ae6b082ebd9d23a, type: 3}
+    volume: 1
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+  - name: On Hit
+    sound: {fileID: 8300000, guid: 29ef2001a9c7d9c49ae073d44467dea3, type: 3}
+    volume: 1
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+  - name: Reflect
+    sound: {fileID: 8300000, guid: 9071c2105efb44040968ea75c4a7deeb, type: 3}
+    volume: 1
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+  - name: Discharge
+    sound: {fileID: 8300000, guid: 9b0e6d1fb2ef7ec48b1224d307938882, type: 3}
+    volume: 1
+    pitch: 0.6
+    playOnAwake: 0
+    loop: 0
+--- !u!81 &148267341
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148267338}
+  m_Enabled: 1
 --- !u!1 &1557453266
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ade1d9015033148af99d5f04943df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  godMode: 0
+  winScreen: {fileID: 0}
 --- !u!1 &7908151909219552155
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +442,7 @@ Transform:
   - {fileID: 7908151908763967877}
   - {fileID: 7908151910249489221}
   - {fileID: 1557453267}
+  - {fileID: 148267339}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -460,7 +552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coin: {fileID: 8357330847841662392, guid: a5e57ed3999ffb94e9c721b1d9322f20, type: 3}
-  duration: 9000
+  duration: 1000
 --- !u!1 &7908151909706918483
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +900,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
+  - {fileID: 6416750106172667544, guid: c7c43dec0b058da4d9c062d00364f3e9, type: 3}
   - {fileID: 6416750106172667544, guid: 833f82bae37cc9745813495564dce1da, type: 3}
+  - {fileID: 6416750106172667544, guid: af0da3932cb5b694a84e248b3dc2564e, type: 3}
+  - {fileID: 6416750106172667544, guid: ac3d4bf19d592c5489596f7701ed4ec0, type: 3}
+  breakTime: 5
   level: {fileID: 0}
   players: []
   safetyDistance: 0

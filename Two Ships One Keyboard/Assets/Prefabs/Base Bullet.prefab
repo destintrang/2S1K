@@ -4915,7 +4915,7 @@ MonoBehaviour:
   color: 1
   redMaterial: {fileID: 2100000, guid: 0b30246b135848243a60d9f054dcd497, type: 2}
   blueMaterial: {fileID: 2100000, guid: ca8c555536abfb042877def92a25d8c4, type: 2}
-  purpleMaterial: {fileID: 2100000, guid: ca8c555536abfb042877def92a25d8c4, type: 2}
+  purpleMaterial: {fileID: 2100000, guid: 5711ac69d2959874cbc191f2f01c2865, type: 2}
 --- !u!95 &3067795663072450887
 Animator:
   serializedVersion: 3
@@ -9782,7 +9782,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0b30246b135848243a60d9f054dcd497, type: 2}
+  - {fileID: 2100000, guid: 5711ac69d2959874cbc191f2f01c2865, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

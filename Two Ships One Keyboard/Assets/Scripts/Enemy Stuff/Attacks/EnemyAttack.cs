@@ -18,9 +18,16 @@ public class EnemyAttack : MonoBehaviour
         {
             return GameObject.FindGameObjectWithTag("BLUE").transform.position;
         }
-        else
+        else //When the attack targets both players, choose randomly which of the two to attack
         {
-            return Vector3.zero;
+            if (Random.Range(0.0f, 1.0f) < 0.5f)
+            {
+                return GameObject.FindGameObjectWithTag("RED").transform.position;
+            }
+            else
+            {
+                return GameObject.FindGameObjectWithTag("BLUE").transform.position;
+            }
         }
 
     }

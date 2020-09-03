@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesh: {fileID: 7459341197684690883}
-  blinkInterval: 50
+  blinkInterval: 10
   animationMultiplier: 0.5
 --- !u!65 &7312444752798793770
 BoxCollider:

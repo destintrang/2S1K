@@ -12,6 +12,9 @@ public class EnemyWaveManager : MonoBehaviour
     EnemyWave currentWave;
     private int waveCounter = -1;
 
+    //How long breaks are in seconds
+    [SerializeField] protected float breakTime;
+
     //Bool of whether we can spawn right now
     private bool canSpawn = true;
 
@@ -53,7 +56,7 @@ public class EnemyWaveManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         UpdateWave();
     }
@@ -75,32 +78,6 @@ public class EnemyWaveManager : MonoBehaviour
         currentWave.UpdateWave();
         return;
 
-        if (spawnTimer < spawnCooldown) {
-            spawnTimer += Time.deltaTime;
-            return;
-        }
-
-        Enemy enemy = currentWave.CheckForSpawn();
-        if (enemy != null)
-        {
-            Enemy spawnedEnemy = Instantiate(enemy, GetSpawnLocation(), Quaternion.identity);
-            //Also reset the spawn cooldown
-            spawnTimer = 0;
-        }
-        return;
-
-        if (activeEnemies < currentWave.GetMaxEnemies())
-        {
-
-            //If there aren't enough enemies deployed, then spawn a new one
-            Enemy e = GetRandomEnemyType();
-            Enemy spawnedEnemy = Instantiate(e, GetSpawnLocation(), Quaternion.identity);
-            activeEnemies++;
-
-            //Also reset the spawn cooldown
-            spawnTimer = 0;
-
-        }
 
     }
 
@@ -110,9 +87,26 @@ public class EnemyWaveManager : MonoBehaviour
     {
 
         waveCounter++;
+
+        //We won!
+        if (waveCounter == waves.Count)
+        {
+            FindObjectOfType<GameManager>().WinGame();
+            return;
+        }
+
         currentWave = waves[waveCounter];
         currentWave.StartWave(xBound, zBound, players, safetyDistance, spawnCooldown);
 
+    }
+    public void FinishWave ()
+    {
+        StartCoroutine(Break());
+    }
+    IEnumerator Break ()
+    {
+        yield return new WaitForSeconds(breakTime);
+        IncrementWave();
     }
 
 
@@ -175,13 +169,7 @@ public class EnemyWaveManager : MonoBehaviour
     }
 
 
-    //Returns a random enemy type from the types listed for this level
-    private Enemy GetRandomEnemyType ()
-    {
-
-        return currentWave.GetEnemyTypes()[Random.Range(0, currentWave.GetEnemyTypes().Count)];
-
-    }
+    
 
 
     public int GetClearedWaves()

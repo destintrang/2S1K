@@ -15,14 +15,19 @@ public class ShieldHitbox : MonoBehaviour
         {
             obj = other.GetComponent<Collision>();
         }
+        else { return; }
 
 
         if (obj.GetColor() == Collision.CollisionType.BLUE)
         {
             if (IsBlockable(other.gameObject))
             {
+
                 Vector3 direction = transform.forward;
                 other.gameObject.GetComponent<Projectile>().ReflectProjectile(direction);
+                //Play reflect sound effect here
+                FindObjectOfType<AudioManager>().Play("Reflect");
+
             }
         }
 

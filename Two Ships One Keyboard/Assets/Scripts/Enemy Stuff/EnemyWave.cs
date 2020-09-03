@@ -7,27 +7,27 @@ public class EnemyWave : MonoBehaviour
 {
 
 
-    //The different types of enemies that can spawn in this wave
-    [SerializeField] protected List<Enemy> enemyTypes = new List<Enemy>();
-    [SerializeField] protected int maxEnemies = 0;
-
-
-    public List<Enemy> GetEnemyTypes () { return enemyTypes; }
-    public int GetMaxEnemies () { return maxEnemies; }
-
-
-
 
 
     [Serializable]
     public struct Group
     {
+        //Max enemies that can be alive at once from this group
         public int max;
+        //Total enemies from this group that must be killed
+        public int total;
+        //Different kinds of enemies that can spawn from this group
         public List<Enemy> enemyList ;
     }
 
     public List<Group> groups;
+
+    //Counts of active enemies for each group
     private List<int> enemyCounters;
+    //Counts of killed enemies for each group
+    private List<int> killCounters;
+    //Counts of spawned enemies for each group
+    private List<int> spawnedCounters;
 
 
     //Level bounds
@@ -49,9 +49,13 @@ public class EnemyWave : MonoBehaviour
 
         //Initialize the current number of enemies for each group (should all be 0)
         enemyCounters = new List<int>();
+        killCounters = new List<int>();
+        spawnedCounters = new List<int>();
         foreach (Group g in groups)
         {
             enemyCounters.Add(0);
+            killCounters.Add(0);
+            spawnedCounters.Add(0);
         }
 
         xBound = x;
@@ -83,10 +87,11 @@ public class EnemyWave : MonoBehaviour
 
         for (int i = 0; i < groups.Count; i++)
         {
-            if (enemyCounters[i] < groups[i].max)
+            if (enemyCounters[i] < groups[i].max && spawnedCounters[i] < groups[i].total)
             {
                 //Debug.Log(i);
                 enemyCounters[i]++;
+                spawnedCounters[i]++;
                 Enemy e = GetRandomEnemyType(groups[i]);
                 Enemy spawnedEnemy = Instantiate(e, GetSpawnLocation(), Quaternion.identity);
                 spawnedEnemy.SetGroup(i);
@@ -98,21 +103,7 @@ public class EnemyWave : MonoBehaviour
 
     }
 
-    public Enemy CheckForSpawn ()
-    {
-
-        for (int i = 0; i < groups.Count; i++)
-        {
-            if (enemyCounters[i] < groups[i].max)
-            {
-                enemyCounters[i]++;
-                return GetRandomEnemyType(groups[i]);
-            }
-        }
-
-        return null;
-
-    }
+    
     private Enemy GetRandomEnemyType(Group g)
     {
 
@@ -126,6 +117,28 @@ public class EnemyWave : MonoBehaviour
     {
 
         enemyCounters[groupIndex]--;
+        killCounters[groupIndex]++;
+        if (CheckWaveCompletion())
+        {
+            //We finished the wave!
+            FindObjectOfType<EnemyWaveManager>().FinishWave();
+        }
+
+    }
+
+    //Returns true if the wave is done, false if not
+    private bool CheckWaveCompletion ()
+    {
+
+        for (int i = 0; i < groups.Count; i++)
+        {
+            if (killCounters[i] < groups[i].total)
+            {
+                return false;
+            }
+        }
+
+        return true;
 
     }
 

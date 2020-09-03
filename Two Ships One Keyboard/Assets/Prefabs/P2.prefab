@@ -334,7 +334,7 @@ MonoBehaviour:
   shieldY: 1
   shieldZ: 0.5
   waveScale: 2
-  waveTime: 400
+  waveTime: 30
   waveDelay: 0.5
 --- !u!1 &1969457991965760171
 GameObject:
@@ -602,7 +602,7 @@ MonoBehaviour:
   shield: {fileID: 1563842012}
   dischargeTime: 0.2
   dischargeCooldown: 4
-  shieldDeploySpeed: 900
+  shieldDeploySpeed: 20
 --- !u!136 &8939028757807785333
 CapsuleCollider:
   m_ObjectHideFlags: 0

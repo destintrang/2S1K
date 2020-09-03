@@ -66,6 +66,11 @@ public class Enemy : BaseShip
         if (other.GetComponent<Collision>() != null && other.GetComponent<Collision>().GetColor() != collisionType.GetColor())
         {
 
+            if (p.IsOwner(this.gameObject))
+            {
+                return;
+            }
+
             //Enemy got hit by a different colored bullet
             TakeDamage(p.GetDamage());
             p.OnHit();
@@ -101,6 +106,8 @@ public class Enemy : BaseShip
         GetComponent<Flash>().PlayDeathFlash();
         //explode
         FindObjectOfType<ExplosionManager>().Explode(transform.position);
+        //Explosion SFX
+        FindObjectOfType<AudioManager>().Play("Death Explosion");
 
     }
     //Called after the enemy's death animation

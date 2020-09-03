@@ -24,7 +24,7 @@ public class ExplosionManager : GameobjectPool
 
         while (counter <= deactivateTime)
         {
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         e.Stop();

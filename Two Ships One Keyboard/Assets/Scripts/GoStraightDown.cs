@@ -16,7 +16,7 @@ public class GoStraightDown : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.position += speed * Vector3.back * Time.deltaTime;
     }

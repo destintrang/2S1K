@@ -19,7 +19,7 @@ public class ShootAround : ShootTowardsTarget
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         //If not actionable, don't do anything
@@ -39,7 +39,6 @@ public class ShootAround : ShootTowardsTarget
 
         //Fire multiple shots!
         float degrees = 360 / projectileNum;
-        Debug.Log(degrees);
         for (int i = 0; i < projectileNum; i++)
         {
             Vector3 dir = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.up) * (transform.position + Vector3.forward);

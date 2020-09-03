@@ -7,10 +7,10 @@ public class Flash : MonoBehaviour
 
 
     //How long to flash white
-    private float flashDuration = 15;
+    private float flashDuration = 5;
 
     //How long to flash during death
-    private float deathFlashDuration = 80;
+    private float deathFlashDuration = 10;
 
     public Material w;
     private Material originalMaterial;
@@ -48,7 +48,7 @@ public class Flash : MonoBehaviour
         while (counter < flashDuration)
         {
             counter++;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         r.material = originalMaterial;
@@ -86,7 +86,7 @@ public class Flash : MonoBehaviour
             {
                 counter++;
             }
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
 

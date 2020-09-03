@@ -27,7 +27,7 @@ public class SparksManager : GameobjectPool
 
         while (counter <= deactivateTime)
         {
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         spark.Stop();
