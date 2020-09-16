@@ -19,6 +19,8 @@ public class BasePlayerShip : BaseShip
     protected float to = 0;
     float counter = 0;
 
+    //Reference to the barrier script
+    [SerializeField] protected Barrier barrier;
     //How long the player is invulnerable after barrier
     [SerializeField] protected float iFrames;
     protected bool invincible = false;
@@ -43,8 +45,12 @@ public class BasePlayerShip : BaseShip
     [SerializeField] protected float upgradedMaxSpeed ;
     [SerializeField] protected float acceleration;
     [SerializeField] protected float upgradedAcceleration;
-    [SerializeField] protected float deceleration ;
-    [SerializeField] protected float upgradedDeceleration ;
+    [SerializeField] protected float deceleration;
+    [SerializeField] protected float upgradedDeceleration;
+
+    [SerializeField] protected float magnetRange;
+    [SerializeField] protected float upgradedMagnetRange;
+    public float GetMagnetRange() { return magnetRange; }
 
 
 
@@ -123,8 +129,8 @@ public class BasePlayerShip : BaseShip
 
 
         speed = new Vector3(xSpeed, 0, zSpeed);
-        transform.position = transform.position + speed * Time.deltaTime;
-        //rb.MovePosition(transform.position + speed * Time.deltaTime);
+        //transform.position = transform.position + speed * Time.deltaTime;
+        rb.MovePosition(transform.position + speed * Time.deltaTime);
         //rb.velocity(transform.position + speed * Time.deltaTime);
         return;
     }
@@ -188,6 +194,16 @@ public class BasePlayerShip : BaseShip
     }
 
 
+    public void ActivateBarrier ()
+    {
+        barrier.ToggleOn();
+    }
+    public bool IsBarrierActive ()
+    {
+        return barrier.IsActive();
+    }
+
+
     Coroutine i = null;
     public void StartInvincibility ()
     {
@@ -233,6 +249,13 @@ public class BasePlayerShip : BaseShip
         invincible = false;
         shipMesh.enabled = true;
 
+    }
+
+
+    public void RemoveVelocity ()
+    {
+        rb.velocity = Vector3.zero;
+        speed = Vector3.zero;
     }
 
 

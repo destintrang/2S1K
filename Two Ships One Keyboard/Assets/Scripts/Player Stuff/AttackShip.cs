@@ -144,7 +144,7 @@ public class AttackShip : BasePlayerShip
             p.transform.position = guns[gunCounter].position;
             gunCounter = (gunCounter + 1) % guns.Count;
 
-            p.StartProjectile(Collision.CollisionType.RED, ship.forward, projectileSpeed, damage);
+            p.StartProjectile(Collision.CollisionType.RED, ship.forward, projectileSpeed, damage, this.gameObject);
         }
         else
         {
@@ -155,8 +155,8 @@ public class AttackShip : BasePlayerShip
             p1.transform.position = guns[0].position;
             p2.transform.position = guns[1].position;
 
-            p1.StartProjectile(Collision.CollisionType.RED, ship.forward, projectileSpeed, damage);
-            p2.StartProjectile(Collision.CollisionType.RED, ship.forward, projectileSpeed, damage);
+            p1.StartProjectile(Collision.CollisionType.RED, ship.forward, projectileSpeed, damage, this.gameObject);
+            p2.StartProjectile(Collision.CollisionType.RED, ship.forward, projectileSpeed, damage, this.gameObject);
 
         }
         fireCounter = fireCooldown;

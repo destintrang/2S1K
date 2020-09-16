@@ -7,17 +7,26 @@ public class ScoreManager : MonoBehaviour
 {
 
 
+    //POINT STUFF
     private int score;
     public int GetScore () { return score; }
 
 
+    //COINS AND UPGRADE STUFF
     [SerializeField] protected int coins;
     private int coinsNeeded = 20;
 
     private int upgradeCount = 0;
-    delegate void UpgradeFunction();
+    delegate string UpgradeFunction();
     private List<UpgradeFunction> redUpgrades = new List<UpgradeFunction> { };
     private List<UpgradeFunction> blueUpgrades = new List<UpgradeFunction> { };
+
+
+    //TIMER STUFF
+    float time = 0;
+    //Toggle this when the game starts
+    private bool timerStarted = false;
+    public void StartTimer () { timerStarted = true; }
 
 
     // Start is called before the first frame update
@@ -35,9 +44,10 @@ public class ScoreManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (!timerStarted) { return; }
+        UpdateTime();
     }
 
 
@@ -84,12 +94,14 @@ public class ScoreManager : MonoBehaviour
     {
 
         int randomIndex = Random.Range(0, redUpgrades.Count);
-        redUpgrades[randomIndex]();
+        string r = redUpgrades[randomIndex]();
         redUpgrades.RemoveAt(randomIndex);
 
         randomIndex = Random.Range(0, blueUpgrades.Count);
-        blueUpgrades[randomIndex]();
+        string b = blueUpgrades[randomIndex]();
         blueUpgrades.RemoveAt(randomIndex);
+
+        FindObjectOfType<HUDManager>().DisplayUpgradeText(r, b);
 
     }
 
@@ -110,42 +122,58 @@ public class ScoreManager : MonoBehaviour
     }
 
     //Red upgrades
-    void UpgradeRedDamage()
+    string UpgradeRedDamage()
     {
-
+        return ("Damage+");
     }
-    void UpgradeRedGuns()
+    string UpgradeRedGuns()
     {
         FindObjectOfType<AttackShip>().UpgradeGuns();
+        return ("Guns+");
     }
-    void UpgradeRedAttackSpeed()
+    string UpgradeRedAttackSpeed()
     {
         FindObjectOfType<AttackShip>().UpgradeAttackSpeed();
+        return ("Fire Rate+");
     }
-    void UpgradeRedProjectileSpeed()
+    string UpgradeRedProjectileSpeed()
     {
         FindObjectOfType<AttackShip>().UpgradeProjectileSpeed();
+        return ("Bullet Speed+");
     }
-    void UpgradeRedMovementSpeed()
+    string UpgradeRedMovementSpeed()
     {
         FindObjectOfType<AttackShip>().UpgradeMovementSpeed();
+        return ("Speed+");
     }
     //Blue upgrades
-    private void UpgradeBlueShieldSize()
+    private string UpgradeBlueShieldSize()
     {
         FindObjectOfType<DefenseShip>(). UpgradeShieldSize();
+        return ("Shield+");
     }
-    private void UpgradeBlueMovementSpeed()
+    private string UpgradeBlueMovementSpeed()
     {
         FindObjectOfType<DefenseShip>().UpgradeMovementSpeed();
+        return ("Speed+");
     }
-    private void UpgradeBlueCooldown()
+    private string UpgradeBlueCooldown()
     {
         FindObjectOfType<DefenseShip>().UpgradeDischargeCooldown();
+        return ("Cooldown Reduced");
     }
-    private void UpgradeBlueDischarge()
+    private string UpgradeBlueDischarge()
     {
         FindObjectOfType<DefenseShip>().UpgradeDischargeSize();
+        return ("Shockwave Size+");
     }
+
+
+    private void UpdateTime ()
+    {
+        time += Time.deltaTime;
+        FindObjectOfType<HUDManager>().UpdateTime(time);
+    }
+
 
 }

@@ -89,6 +89,50 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148267338}
   m_Enabled: 1
+--- !u!1 &178571593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 178571594}
+  - component: {fileID: 178571595}
+  m_Layer: 0
+  m_Name: Pause Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &178571594
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178571593}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7908151909347863926}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &178571595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178571593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea47dee848cb9d419e1b8a73a34e2c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseScreen: {fileID: 0}
 --- !u!1 &1557453266
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +178,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj: {fileID: 1766501088966138708, guid: ff69a82c3e709c64eb2d8c8cbf8cb3b9, type: 3}
   deactivateTime: 50
+--- !u!1 &2052950828
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2052950829}
+  - component: {fileID: 2052950830}
+  m_Layer: 0
+  m_Name: Barrier Pickup Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2052950829
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052950828}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7908151909347863926}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2052950830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052950828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6b7a0874e9a9048a5a98feff5e4574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUp: {fileID: 8357330847841662392, guid: 3ee98a177687e954cabe668df00fde0f, type: 3}
+  chance: 0.1
+  duration: 1000
 --- !u!1 &7908151908763967878
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,8 +422,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ade1d9015033148af99d5f04943df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  godMode: 0
+  godMode: 1
   winScreen: {fileID: 0}
+  redShip: {fileID: 0}
+  blueShip: {fileID: 0}
+  firstDelay: 250
+  secondDelay: 250
+  thirdDelay: 125
 --- !u!1 &7908151909219552155
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,6 +538,8 @@ Transform:
   - {fileID: 7908151910249489221}
   - {fileID: 1557453267}
   - {fileID: 148267339}
+  - {fileID: 2052950829}
+  - {fileID: 178571594}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -644,6 +741,10 @@ MonoBehaviour:
   scoreUpdateTime: 2
   coinBar: {fileID: 0}
   barUpdateTime: 1
+  redUpgrade: {fileID: 0}
+  blueUpgrade: {fileID: 0}
+  upgradeTextDuration: 240
+  timeText: {fileID: 0}
 --- !u!1 &7908151909994813534
 GameObject:
   m_ObjectHideFlags: 0

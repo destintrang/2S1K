@@ -88,6 +88,8 @@ public class Enemy : BaseShip
 
         //Spawn coins
         SpawnCoins();
+        //Check to see if we spawn a barrier pickup
+        FindObjectOfType<BarrierPickupManager>().SpawnBarrier(transform.position);
         //Increment points
         FindObjectOfType<ScoreManager>().IncreaseScore(points);
 

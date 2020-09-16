@@ -51,12 +51,16 @@ public class InputManager : MonoBehaviour
     public bool GetP1RotateRight()
     {
 
+        if (disabled) { return false; }
+
         if (Input.GetKeyDown(KeyCode.E)) { return true; }
         else return false;
 
     }
     public bool GetP1RotateLeft()
     {
+
+        if (disabled) { return false; }
 
         if (Input.GetKeyDown(KeyCode.Q)) { return true; }
         else return false;
@@ -65,12 +69,16 @@ public class InputManager : MonoBehaviour
     public bool GetP2RotateRight()
     {
 
+        if (disabled) { return false; }
+
         if (Input.GetKeyDown(KeyCode.O)) { return true; }
         else return false;
 
     }
     public bool GetP2RotateLeft()
     {
+
+        if (disabled) { return false; }
 
         if (Input.GetKeyDown(KeyCode.U)) { return true; }
         else return false;
@@ -81,12 +89,16 @@ public class InputManager : MonoBehaviour
     public bool GetP1Action()
     {
 
+        if (disabled) { return false; }
+
         if (Input.GetKey(KeyCode.Space)) { return true; }
         else return false;
 
     }
     public bool GetP2Action()
     {
+
+        if (disabled) { return false; }
 
         if (Input.GetKeyDown(KeyCode.H)) { return true; }
         else return false;

@@ -42,7 +42,7 @@ public class ObjectSpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         if (delayCounter >= 0)

@@ -17,33 +17,50 @@ public class Magnet : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         UpdateMagnet();
     }
 
 
-    void UpdateMagnet ()
+    protected virtual void UpdateMagnet ()
     {
 
-        Vector3 playerPos = FindClosestPlayer();
-        float distance = Vector3.Distance(playerPos, transform.position);
+        bool red = false;
+        bool blue = false;
 
-        //Check if the player is close enough to this object
-        if (distance <= magnetRange)
+        BasePlayerShip r = FindObjectOfType<AttackShip>();
+        BasePlayerShip b = FindObjectOfType<DefenseShip>();
+
+        if (Vector3.Distance(r.transform.position, transform.position) <= r.GetMagnetRange()) { red = true; }
+        if (Vector3.Distance(b.transform.position, transform.position) <= b.GetMagnetRange()) { blue = true; }
+
+        if (red && blue)
         {
-            UpdatePosition(playerPos, magnetRange - distance);
+
+            Vector3 playerPos = FindClosestPlayer();
+            
+            UpdatePosition(playerPos, 1);
+
+        }
+        else if (red)
+        {
+            UpdatePosition(r.transform.position, 1);
+        }
+        else if (blue)
+        {
+            UpdatePosition(b.transform.position, 1);
         }
 
     }
-    void UpdatePosition (Vector3 playerPos, float strength)
+    protected void UpdatePosition (Vector3 playerPos, float strength)
     {
         transform.position = Vector3.Slerp(transform.position, playerPos, magnetStrength * Time.deltaTime * strength);
     }
 
 
     //Can only magnetize to one player, so magnetize to the closest one
-    Vector3 FindClosestPlayer ()
+    protected Vector3 FindClosestPlayer ()
     {
 
         Vector3 attackPos = FindObjectOfType<AttackShip>().transform.position;
