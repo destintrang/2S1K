@@ -139,7 +139,7 @@ public class Projectile : MonoBehaviour
         FindObjectOfType<SparksManager>().Spark(transform.position, direction);
 
         //Play on hit SFX
-        FindObjectOfType<AudioManager>().Play("On Hit");
+        FindObjectOfType<AudioManager>().PlaySoundEffect("On Hit");
 
         DestroyProjectile();
 

@@ -56,13 +56,13 @@ public class ShootTowardsTarget : EnemyAttack
         if (cooldownCounter > 0) { return; }
 
         //We can fire
-        ShootTarget(GetTargetLocation(target));
+        ShootTarget(GetTargetLocation(target), projectileType);
         cooldownCounter = DelayRandomizer(attackCooldown, attackCooldownRandomizer);
 
     }
 
 
-    protected void ShootTarget (Vector3 target)
+    protected virtual void ShootTarget (Vector3 target, Collision.CollisionType type)
     {
         //Get a projectile and place it at the enemy's position
         Projectile p = ProjectileManager.instance.RequestProjectile();
@@ -73,7 +73,7 @@ public class ShootTowardsTarget : EnemyAttack
         Vector3 dir = (playerPos - transform.position).normalized;
         dir = AccuracyRandomizer(dir, inaccuracy);
 
-        p.StartProjectile(projectileType, dir, projectileSpeed, 1, this.gameObject);
+        p.StartProjectile(type, dir, projectileSpeed, 1, this.gameObject);
     }
 
 

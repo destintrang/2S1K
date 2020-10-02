@@ -24,7 +24,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] protected Vector3 offset = new Vector3(-80, 0, 0);
 
     //To handle fast inputs
-    protected float inputCooldown = 8;
+    protected float inputCooldown = 10;
     protected float cooldownCounter = 0;
 
 
@@ -48,7 +48,6 @@ public class ButtonManager : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log("sajdapso");
         //Update counter
         if (cooldownCounter < inputCooldown)
         {
@@ -85,14 +84,12 @@ public class ButtonManager : MonoBehaviour
         int input = GetInput();
         if (input < 0)
         {
-            Debug.Log("sajdapso");
             MoveSelector(1);
             //MenuSFXManager.instance.PlayButtonNavi();
             cooldownCounter = 0;
         }
         else if (input > 0)
         {
-            Debug.Log("sajdapso");
             MoveSelector(-1);
             //MenuSFXManager.instance.PlayButtonNavi();
             cooldownCounter = 0;
@@ -159,14 +156,37 @@ public class ButtonManager : MonoBehaviour
         selector.localPosition = new Vector3(options[optionIndex].localPosition.x, options[optionIndex].localPosition.y, options[optionIndex].localPosition.z) + offset;
 
     }
-    protected void MoveSelector(int direction)
+
+
+    protected virtual void MoveSelector(int direction)
     {
 
         optionIndex += direction;
         if (optionIndex < 0) { optionIndex = options.Count - 1; }
         else if (optionIndex >= options.Count) { optionIndex = 0; }
 
-        selector.localPosition = new Vector3(options[optionIndex].localPosition.x, options[optionIndex].localPosition.y, options[optionIndex].localPosition.z) + offset;
+        if (selectorCoroutine != null) { StopCoroutine(selectorCoroutine); }
+        selectorCoroutine = StartCoroutine(SelectorLerp(new Vector3(options[optionIndex].localPosition.x, options[optionIndex].localPosition.y, options[optionIndex].localPosition.z) + offset));
+        //selector.localPosition = new Vector3(options[optionIndex].localPosition.x, options[optionIndex].localPosition.y, options[optionIndex].localPosition.z) + offset;
+
+    }
+    //Coroutine for moving the selector over time
+    protected Coroutine selectorCoroutine = null;
+    protected IEnumerator SelectorLerp (Vector3 target)
+    {
+        Debug.Log(selector.localPosition);
+        Debug.Log(target);
+        float counter = 0;
+        float lerpDuration = inputCooldown / 4;
+
+        while (counter < lerpDuration)
+        {
+            counter += Time.deltaTime;
+            selector.localPosition = Vector3.Lerp(selector.localPosition, target, counter / lerpDuration);
+            yield return new WaitForFixedUpdate();
+        }
+
+        selector.localPosition = target;
 
     }
 

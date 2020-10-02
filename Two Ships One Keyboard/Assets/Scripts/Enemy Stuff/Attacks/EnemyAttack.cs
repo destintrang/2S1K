@@ -7,6 +7,10 @@ public class EnemyAttack : MonoBehaviour
 {
 
 
+    //whether this enemy does its attack constantly
+    [SerializeField] protected bool alwaysAttack = true;
+
+
     protected Vector3 GetTargetLocation(Targeting.TargetPlayer target)
     {
 

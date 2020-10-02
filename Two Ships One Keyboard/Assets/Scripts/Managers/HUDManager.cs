@@ -9,6 +9,7 @@ public class HUDManager : MonoBehaviour
 
 
     [SerializeField] protected Text scoreText;
+    [SerializeField] protected Text highScoreText;
     [SerializeField] protected float scoreUpdateTime;
 
 
@@ -22,6 +23,9 @@ public class HUDManager : MonoBehaviour
 
 
     [SerializeField] protected Text timeText;
+
+
+    [SerializeField] protected Image bossHealthBar;
 
 
     // Start is called before the first frame update
@@ -43,27 +47,41 @@ public class HUDManager : MonoBehaviour
 
     //SCORE MANAGED HERE
     Coroutine scoreCoroutine = null;
-    public void UpdateScore (int origScore, int newScore)
+    Coroutine highScoreCoroutine = null;
+    public void UpdateScore (int origScore, int newScore, int highScore)
     {
+
         //Start raising score, but stop it from raising if it was in the process of doing so
         if (scoreCoroutine != null) { StopCoroutine(scoreCoroutine); }
-        scoreCoroutine = StartCoroutine(UpdateScoreText(origScore, newScore));
+        scoreCoroutine = StartCoroutine(UpdateScoreText(scoreText, origScore, newScore));
+
+        //Do the same for the high score
+        Debug.Log(highScore);
+        Debug.Log(newScore);
+        if (highScore >= newScore) { return; } //If the high score is still higher than the score, then just return
+        if (highScoreCoroutine != null) { StopCoroutine(highScoreCoroutine); }
+        highScoreCoroutine = StartCoroutine(UpdateScoreText(highScoreText, highScore, newScore));
+
     }
-    public IEnumerator UpdateScoreText(float origScore, float newScore)
+    public IEnumerator UpdateScoreText(Text t, float origScore, float newScore)
     {
 
-        float timer = 0f;
+        float counter = 0f;
 
 
-        while (timer < scoreUpdateTime)
+        while (counter < scoreUpdateTime)
         {
-            timer += Time.deltaTime;
-            scoreText.text = ((int)Mathf.Lerp(origScore, newScore, timer / scoreUpdateTime)).ToString();
+            counter += Time.deltaTime;
+            t.text = ((int)Mathf.Lerp(origScore, newScore, counter / scoreUpdateTime)).ToString();
             yield return new WaitForFixedUpdate();
         }
 
-        scoreText.text = ((int) newScore).ToString();
+        t.text = ((int) newScore).ToString();
 
+    }
+    public void InitializeHighScore (int h)
+    {
+        highScoreText.text = h.ToString();
     }
 
 
@@ -160,6 +178,54 @@ public class HUDManager : MonoBehaviour
     private string TimeToString (float t)
     {
         return ((int)(t / 60)).ToString() + ":" + ((int)(t % 60.0f)).ToString() + ":" + ((int)((t - (int) t) * 100)).ToString();
+    }
+
+
+    //BOSS HEALTH BAR MANAGED HERE
+    Coroutine bossCoroutine = null;
+    public void LoadBossHealthBar (float time)
+    {
+        StartCoroutine(InitializeBar(time));
+    }
+    IEnumerator InitializeBar (float time)
+    {
+
+        float counter = 0;
+
+        bossHealthBar.fillAmount = 0;
+
+        while (counter < time)
+        {
+            bossHealthBar.fillAmount = Mathf.Lerp(0.0f, 1.0f, counter / time);
+            counter++;
+            yield return new WaitForFixedUpdate();
+        }
+
+        bossHealthBar.fillAmount = 1;
+
+    }
+    public void UpdateBossHealthBar (float percentage)
+    {
+        if (bossCoroutine != null) { StopCoroutine(bossCoroutine); }
+        bossCoroutine = StartCoroutine(BossBarCoroutine(percentage));
+    }
+    IEnumerator BossBarCoroutine (float percentage)
+    {
+
+        float counter = 0;
+
+        float originalFill = bossHealthBar.fillAmount;
+        float bossBarUpdateTime = barUpdateTime * 4;
+
+        while (counter < bossBarUpdateTime)
+        {
+            bossHealthBar.fillAmount = Mathf.Lerp(originalFill, percentage, counter / bossBarUpdateTime);
+            counter++;
+            yield return new WaitForFixedUpdate();
+        }
+
+        bossHealthBar.fillAmount = percentage;
+
     }
 
 

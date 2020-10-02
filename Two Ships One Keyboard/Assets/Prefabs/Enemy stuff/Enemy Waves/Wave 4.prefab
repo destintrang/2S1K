@@ -44,12 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groups:
-  - max: 2
+  - max: 1
     total: 4
     enemyList:
     - {fileID: 2016569268105575007, guid: 2a7146d1450d14c44a66bb28609b13e0, type: 3}
-  - max: 1
-    total: 3
+  - max: 2
+    total: 4
     enemyList:
     - {fileID: 2016569268105575007, guid: 5d531451d35f1a34c9df94dea7722fd2, type: 3}
   - max: 1

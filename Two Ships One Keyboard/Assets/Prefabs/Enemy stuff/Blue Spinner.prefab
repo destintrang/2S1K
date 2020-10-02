@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e30857d0e72cd4692272e3ef894c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 7
   points: 150
   coins: 3
 --- !u!114 &6542779652017390580
@@ -145,13 +145,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a99a6744c5025b4dbe2ec78e7f84645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alwaysAttack: 1
   projectileType: 1
-  projectileSpeed: 5
+  projectileSpeed: 3
   inaccuracy: 0
-  attackCooldown: 45
+  attackCooldown: 150
   attackCooldownRandomizer: 0
   ship: {fileID: 1385387519630645781}
-  projectileNum: 3
+  projectileNum: 9
 --- !u!114 &4768547385445559645
 MonoBehaviour:
   m_ObjectHideFlags: 0

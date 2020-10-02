@@ -88,7 +88,7 @@ public class ShieldController : MonoBehaviour
         shield.gameObject.SetActive(false);
 
         //Play the discharge SFX
-        FindObjectOfType<AudioManager>().Play("Discharge");
+        FindObjectOfType<AudioManager>().PlaySoundEffect("Discharge");
 
         StartCoroutine(Shockwave());
     }

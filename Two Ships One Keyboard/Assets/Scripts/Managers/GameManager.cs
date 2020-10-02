@@ -59,8 +59,14 @@ public class GameManager : MonoBehaviour
 
         //Lose the game
 
+        FindObjectOfType<ScoreManager>().StopTimer();
         DisableEverything();
         StopAllCoroutines();
+
+        if (FindObjectOfType<StatsManager>() != null)
+        {
+            FindObjectOfType<StatsManager>().UpdateHighScore(FindObjectOfType<ScoreManager>().GetScore());
+        }
 
         loseScreen.SetActive(true);
         loseScreen.GetComponent<ButtonManager>().Activate();
@@ -68,14 +74,22 @@ public class GameManager : MonoBehaviour
     }
 
 
-    //This quit method is only called through the pause menu
-    public void QuitGame ()
+    //This quit method is only called through the pause menu or after death
+    //bool determines if this was called through the pause menu
+    public void QuitGame (bool pause)
     {
 
         DisableEverything();
         StopAllCoroutines();
+
+
         Time.timeScale = 1;
-        FindObjectOfType<PauseButtonManager>().gameObject.SetActive(false);
+        if (pause)
+        {
+            FindObjectOfType<PauseButtonManager>().gameObject.SetActive(false);
+            //Update the high score here
+            FindObjectOfType<StatsManager>().UpdateHighScore(FindObjectOfType<ScoreManager>().GetScore());
+        }
         FindObjectOfType<Transition>().PanDownToBlack(0.3f, GoToMenu);
 
 
@@ -111,8 +125,10 @@ public class GameManager : MonoBehaviour
         foreach (Enemy e in FindObjectsOfType<Enemy>())
         {
 
-            e.GetComponent<EnemyMovement>().enabled = false;
-            e.GetComponent<EnemyAttack>().enabled = false;
+            EnemyMovement m = e.GetComponent<EnemyMovement>();
+            if (m != null) m.enabled = false;
+            EnemyAttack a = e.GetComponent<EnemyAttack>();
+            if (a != null) a.enabled = false;
 
         }
 

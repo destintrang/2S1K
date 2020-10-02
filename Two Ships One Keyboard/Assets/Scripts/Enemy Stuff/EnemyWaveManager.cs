@@ -68,6 +68,11 @@ public class EnemyWaveManager : MonoBehaviour
     {
         currentWave.OnEnemyDeath(g);
     }
+    //Call this when the boss dies
+    public void OnBossDeath ()
+    {
+        FinishWave();
+    }
 
 
 
@@ -86,6 +91,12 @@ public class EnemyWaveManager : MonoBehaviour
     public void IncrementWave ()
     {
 
+        if (currentWave != null)
+        {
+            Destroy(currentWave.gameObject);
+            currentWave = null;
+        }
+
         waveCounter++;
 
         //We won!
@@ -95,7 +106,7 @@ public class EnemyWaveManager : MonoBehaviour
             return;
         }
 
-        currentWave = waves[waveCounter];
+        currentWave = Instantiate(waves[waveCounter], this.transform);
         currentWave.StartWave(xBound, zBound, players, safetyDistance, spawnCooldown);
 
     }

@@ -8,7 +8,7 @@ public class Enemy : BaseShip
 
 
     public int maxHealth;
-    private int health;
+    protected int health;
 
     //Is this enemy at 0 health yet?
     private bool dead = false;
@@ -62,6 +62,7 @@ public class Enemy : BaseShip
         //Only handle collisions from projectiles
         Projectile p = other.GetComponent<Projectile>();
         if (p == null) { return; }
+        if (other.GetComponent<Collision>() == null) { return; }
 
         if (other.GetComponent<Collision>() != null && other.GetComponent<Collision>().GetColor() != collisionType.GetColor())
         {
@@ -109,11 +110,11 @@ public class Enemy : BaseShip
         //explode
         FindObjectOfType<ExplosionManager>().Explode(transform.position);
         //Explosion SFX
-        FindObjectOfType<AudioManager>().Play("Death Explosion");
+        FindObjectOfType<AudioManager>().PlaySoundEffect("Death Explosion");
 
     }
     //Called after the enemy's death animation
-    public void KillEnemy ()
+    public virtual void KillEnemy ()
     {
 
         //Alert the wave manager that an enemy has died
@@ -187,6 +188,11 @@ public class Enemy : BaseShip
 
         }
 
+    }
+
+    public float GetHealthPercentage ()
+    {
+        return ((float)health / (float)maxHealth);
     }
 
 

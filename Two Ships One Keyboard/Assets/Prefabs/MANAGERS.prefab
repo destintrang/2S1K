@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f675ec74073b67b469aaa27bf593317e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackTransitionTime: 0
   sounds:
   - name: Game Track
-    sound: {fileID: 8300000, guid: b90c0211c123259479da4bc541bc80fa, type: 3}
+    sound: {fileID: 8300000, guid: b7094eae7a7ae8841ab88782aebbb361, type: 3}
     volume: 0.6
     pitch: 1
     playOnAwake: 1
@@ -424,6 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   godMode: 1
   winScreen: {fileID: 0}
+  loseScreen: {fileID: 0}
   redShip: {fileID: 0}
   blueShip: {fileID: 0}
   firstDelay: 250
@@ -588,7 +590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectSpeed: 1
-  delay: 150
+  delay: 75
   sizeRandomizer: 0.5
   obj: {fileID: 3972216419877795110, guid: fadd278aa0203774aa6b1cec8ddb5084, type: 3}
   level: {fileID: 0}
@@ -738,6 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 0}
+  highScoreText: {fileID: 0}
   scoreUpdateTime: 2
   coinBar: {fileID: 0}
   barUpdateTime: 1
@@ -745,6 +748,7 @@ MonoBehaviour:
   blueUpgrade: {fileID: 0}
   upgradeTextDuration: 240
   timeText: {fileID: 0}
+  bossHealthBar: {fileID: 0}
 --- !u!1 &7908151909994813534
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,8 +881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7677f3378e906344a6d37e70270c8f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectSpeed: 4
-  delay: 200
+  objectSpeed: 5
+  delay: 100
   sizeRandomizer: 0.5
   obj: {fileID: 3972216419877795110, guid: fadd278aa0203774aa6b1cec8ddb5084, type: 3}
   level: {fileID: 0}
@@ -940,7 +944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectSpeed: 3
-  delay: 150
+  delay: 75
   sizeRandomizer: 0.5
   obj: {fileID: 3972216419877795110, guid: fadd278aa0203774aa6b1cec8ddb5084, type: 3}
   level: {fileID: 0}
@@ -1001,10 +1005,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - {fileID: 6416750106172667544, guid: c7c43dec0b058da4d9c062d00364f3e9, type: 3}
-  - {fileID: 6416750106172667544, guid: 833f82bae37cc9745813495564dce1da, type: 3}
-  - {fileID: 6416750106172667544, guid: af0da3932cb5b694a84e248b3dc2564e, type: 3}
-  - {fileID: 6416750106172667544, guid: ac3d4bf19d592c5489596f7701ed4ec0, type: 3}
+  - {fileID: -3616576725836498724, guid: 28b16de558c69de41ba97b339b7909e4, type: 3}
+  - {fileID: -3616576725836498724, guid: 28b16de558c69de41ba97b339b7909e4, type: 3}
   breakTime: 5
   level: {fileID: 0}
   players: []

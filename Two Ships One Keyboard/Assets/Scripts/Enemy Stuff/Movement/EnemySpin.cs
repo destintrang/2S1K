@@ -23,4 +23,6 @@ public class EnemySpin : EnemyMovement
 
         transform.Rotate(Vector3.up, speed * Time.deltaTime);
     }
+
+
 }

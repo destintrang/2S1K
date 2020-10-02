@@ -44,7 +44,7 @@ public class EnemyWave : MonoBehaviour
     private float spawnTimer;
 
 
-    public void StartWave (float x, float z, List<Transform> p, float sD, float sC)
+    public virtual void StartWave (float x, float z, List<Transform> p, float sD, float sC)
     {
 
         //Initialize the current number of enemies for each group (should all be 0)
@@ -66,7 +66,7 @@ public class EnemyWave : MonoBehaviour
         spawnTimer = 0;
 
     }
-    public void UpdateWave ()
+    public virtual void UpdateWave ()
     {
 
         if (spawnTimer < spawnCooldown)

@@ -9,12 +9,13 @@ public class ScoreManager : MonoBehaviour
 
     //POINT STUFF
     private int score;
+    private int highScore;
     public int GetScore () { return score; }
 
 
     //COINS AND UPGRADE STUFF
     [SerializeField] protected int coins;
-    private int coinsNeeded = 20;
+    private int coinsNeeded = 35;
 
     private int upgradeCount = 0;
     delegate string UpgradeFunction();
@@ -24,9 +25,11 @@ public class ScoreManager : MonoBehaviour
 
     //TIMER STUFF
     float time = 0;
+    float levelTime = 0;
     //Toggle this when the game starts
     private bool timerStarted = false;
-    public void StartTimer () { timerStarted = true; }
+    public void StartTimer() { timerStarted = true; }
+    public void StopTimer() { timerStarted = false; }
 
 
     // Start is called before the first frame update
@@ -36,6 +39,12 @@ public class ScoreManager : MonoBehaviour
         //Initialize score/coins
         score = 0;
         coins = 0;
+
+        if (FindObjectOfType<StatsManager>() != null)
+        {
+            highScore = FindObjectOfType<StatsManager>().GetHighScore();
+        }
+        FindObjectOfType<HUDManager>().InitializeHighScore(highScore);
 
         //Initialize upgrades
         InitializeUpgrades();
@@ -54,7 +63,8 @@ public class ScoreManager : MonoBehaviour
     public void IncreaseScore (int increase)
     {
 
-        FindObjectOfType<HUDManager>().UpdateScore(score, score + increase);
+        FindObjectOfType<HUDManager>().UpdateScore(score, score + increase, highScore);
+        highScore = Mathf.Max(highScore, score + increase);
         score += increase;
 
     }
@@ -76,6 +86,11 @@ public class ScoreManager : MonoBehaviour
 
     }
 
+    public void CLearLevel (int level)
+    {
+        FindObjectOfType<StatsManager>().ClearLevel(level, levelTime);
+    }
+
 
 
     //UPGRADE STUFF
@@ -83,9 +98,8 @@ public class ScoreManager : MonoBehaviour
     {
 
         coins = 0;
-        coinsNeeded += 5;
+        coinsNeeded += 10;
 
-        Debug.Log("UPGRADE");
         UpgradeShips();
 
     }
@@ -172,6 +186,7 @@ public class ScoreManager : MonoBehaviour
     private void UpdateTime ()
     {
         time += Time.deltaTime;
+        levelTime += Time.deltaTime;
         FindObjectOfType<HUDManager>().UpdateTime(time);
     }
 

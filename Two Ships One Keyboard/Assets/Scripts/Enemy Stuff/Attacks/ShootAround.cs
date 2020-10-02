@@ -22,6 +22,8 @@ public class ShootAround : ShootTowardsTarget
     void FixedUpdate()
     {
 
+        if (!alwaysAttack) { return; }
+
         //If not actionable, don't do anything
         if (!GetComponent<Enemy>().IsActionable()) { return; }
 
@@ -37,6 +39,15 @@ public class ShootAround : ShootTowardsTarget
         cooldownCounter -= 1;
         if (cooldownCounter > 0) { return; }
 
+        ShootAroundEnemy(projectileType);
+
+        cooldownCounter = DelayRandomizer(attackCooldown, attackCooldownRandomizer);
+
+    }
+
+    public void ShootAroundEnemy (Collision.CollisionType type)
+    {
+
         //Fire multiple shots!
         float degrees = 360 / projectileNum;
         for (int i = 0; i < projectileNum; i++)
@@ -44,11 +55,11 @@ public class ShootAround : ShootTowardsTarget
             Vector3 dir = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.up) * (transform.position + Vector3.forward);
             Vector3 f = dir - transform.position;
             dir = Quaternion.AngleAxis(degrees * i, Vector3.up) * f;
-            ShootTarget(dir + transform.position);
+            ShootTarget(dir + transform.position, type);
         }
         //ShootTarget(transform.position + Vector3.forward);
-        cooldownCounter = DelayRandomizer(attackCooldown, attackCooldownRandomizer);
 
     }
+
 
 }

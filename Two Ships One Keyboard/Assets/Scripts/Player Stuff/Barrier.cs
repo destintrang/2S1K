@@ -64,7 +64,7 @@ public class Barrier : MonoBehaviour
                 Vector3 direction = transform.forward;
                 other.gameObject.GetComponent<Projectile>().ReflectProjectile(direction);
                 //Play reflect sound effect here
-                FindObjectOfType<AudioManager>().Play("Reflect");
+                FindObjectOfType<AudioManager>().PlaySoundEffect("Reflect");
 
             }
         }

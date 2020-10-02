@@ -162,7 +162,7 @@ public class AttackShip : BasePlayerShip
         fireCounter = fireCooldown;
 
         //Play the sound effect
-        FindObjectOfType<AudioManager>().Play("Red Ship Fire");
+        FindObjectOfType<AudioManager>().PlaySoundEffect("Red Ship Fire");
 
     }
 
