@@ -149,7 +149,7 @@ MonoBehaviour:
   projectileType: 1
   projectileSpeed: 3
   inaccuracy: 0
-  attackCooldown: 150
+  attackCooldown: 90
   attackCooldownRandomizer: 0
   ship: {fileID: 1385387519630645781}
   projectileNum: 9

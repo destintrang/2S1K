@@ -56,6 +56,7 @@ public class Enemy : BaseShip
     }
 
 
+    //Called when another object touches this object
     protected override void OnTriggerEnter(Collider other)
     {
 
@@ -78,6 +79,28 @@ public class Enemy : BaseShip
 
         }
 
+    }
+    //Called from extensions of this enemy's hitbox
+    public void OnProjectileEnter(Collider other)
+    {
+        //Only handle collisions from projectiles
+        Projectile p = other.GetComponent<Projectile>();
+        if (p == null) { return; }
+        if (other.GetComponent<Collision>() == null) { return; }
+
+        if (other.GetComponent<Collision>() != null && other.GetComponent<Collision>().GetColor() != collisionType.GetColor())
+        {
+
+            if (p.IsOwner(this.gameObject))
+            {
+                return;
+            }
+
+            //Enemy got hit by a different colored bullet
+            TakeDamage(p.GetDamage());
+            p.OnHit();
+
+        }
     }
 
 

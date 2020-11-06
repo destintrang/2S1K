@@ -7,6 +7,8 @@ public class FirstBossBounce : EnemyBounce
 {
 
 
+    [SerializeField] protected List<GameObject> extensionVisuals;
+
     [SerializeField] protected float initialSpeed;
     [SerializeField] protected float finalSpeed;
 
@@ -20,6 +22,17 @@ public class FirstBossBounce : EnemyBounce
         initialSpeed = maxSpeed;
         SetSpawnBounds();
         currentDirection = startingDirection;
+        transform.LookAt(transform.position + currentDirection * 1);
+
+        foreach (DelayedFollow f in GetComponentsInChildren<DelayedFollow>())
+        {
+            f.Unparent();
+        }
+
+        foreach (GameObject e in extensionVisuals)
+        {
+            e.SetActive(true);
+        }
     }
 
 
@@ -49,8 +62,6 @@ public class FirstBossBounce : EnemyBounce
                 float a = GetRandomBounceAngle();
                 currentDirection = Vector3.Reflect(currentDirection, normal);
                 currentDirection = Quaternion.AngleAxis(a, Vector3.up) * currentDirection;
-                //d = Quaternion.AngleAxis(a, Vector3.up) * currentDirection;
-                Debug.Log(a);
             }
             else
             {

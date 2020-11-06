@@ -9,6 +9,8 @@ public class BossWave : EnemyWave
     [SerializeField] protected GameObject boss;
     [SerializeField] protected Vector3 bossSpawnPosition;
     [SerializeField] protected Vector3 bossNewPosition;
+    //Which way the boss should face when it spawns
+    [SerializeField] protected Vector3 bossSpawnDirection;
 
     //How long it takes to bring the player ships to the center
     private static float repositionDuration = 250;
@@ -81,6 +83,10 @@ public class BossWave : EnemyWave
 
         //Spawn the boss
         GameObject b = Instantiate(boss, bossSpawnPosition, Quaternion.identity);
+
+        //Debug.Log((transform.position + new Vector3(bossSpawnDirection.x, 0, bossSpawnDirection.z) * 5));
+        b.transform.LookAt(bossSpawnPosition + new Vector3(bossSpawnDirection.x, 0, bossSpawnDirection.z) * 5);
+
         b.GetComponent<Enemy>().enabled = false;
         b.GetComponent<EnemyMovement>().enabled = false;
         //b.GetComponent<EnemyAttack>().enabled = false;

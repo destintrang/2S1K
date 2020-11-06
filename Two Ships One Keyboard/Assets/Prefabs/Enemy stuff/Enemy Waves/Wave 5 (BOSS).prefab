@@ -47,6 +47,7 @@ MonoBehaviour:
   boss: {fileID: 1051877087189909249, guid: 58d15a6eea126d14d92c8e553921d967, type: 3}
   bossSpawnPosition: {x: -35, y: 0, z: 0}
   bossNewPosition: {x: -25, y: 0, z: 0}
+  bossSpawnDirection: {x: 1, y: 0, z: 0}
   playerPositionA: {x: 0, y: 0, z: 3.5}
   playerPositionB: {x: 0, y: 0, z: -3.5}
   bossTrack: First Boss Track
