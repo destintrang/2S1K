@@ -1728,4 +1728,5 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/Level 1.unity
-  playerPath: C:/Users/Destin/Documents/Unity/2S1K/Two Ships One Keyboard/Builds/Mac/x86/x86.app
+  playerPath: C:/Users/Destin/Documents/Unity/2S1K/Two Ships One Keyboard/Builds/Mac
+    Debug.app
